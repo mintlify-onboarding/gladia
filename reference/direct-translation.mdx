@@ -1,0 +1,649 @@
+---
+title: "Translation (Beta)"
+---
+
+Gladia API provides a convenient way to perform audio-to-text transcription and translation services. In addition to standard audio transcription and translation, Gladia API also offers a "direct translation" feature, which translates the text output of the audio transcription directly to the specified target language.
+
+## Supported languages
+
+The list of supported languages is available [here](/reference/supported-languages).
+
+If you are looking for new language please request it here: [http://together.gladia.io/](http://together.gladia.io/).
+
+## API Endpoint configuration
+
+### Requested parameter to activate the translation
+
+The following form data should be included in the API call:
+
+_audio\_url_: The URL of the audio file to be transcribed and translated. The audio file should be in WAV format.  
+_target\_translation\_language_: The target language for the direct translation. This parameter is only used when toggle_direct\_translate is set to true._ 
+_\_toggle\_direct\_translate_: A boolean value indicating whether to perform direct translation. Set to true to use direct translation and false to disable direct translation.
+
+Shell
+
+`curl -X 'POST'
+    'https://api.gladia.io/audio/text/audio-transcription'
+    -H 'accept: application/json'
+    -H 'x-gladia-key: XXXX'
+    -H 'Content-Type: multipart/form-data'
+    -F "audio_url=http://files.gladia.io/example/audio-transcription/split_infinity.wav"
+    -F "target_translation_language=afrikaans"
+    -F "toggle_direct_translate=true"
+`
+
+In this example request, the audio file at [http://files.gladia.io/example/audio-transcription/split\_infinity.wav](http://files.gladia.io/example/audio-transcription/split%5Finfinity.wav) will be transcribed and translated to Afrikaans using direct translation.
+
+The response from Gladia API will be a JSON object containing the transcription and translation results. If the direct translation was used, the translation result would be included in the response, although the original word-level transcription will remain in the original language.
+
+results
+
+`{
+  "prediction": [
+    {
+      "time_begin": 0.09,
+      "time_end": 2.07,
+      "transcription": "Verdeling van die eindeloosheid",
+      "language": "afrikaans",
+      "confidence": 0.55,
+      "words": [
+        {
+          "word": " Split",
+          "begin": 0.09,
+          "end": 0.75,
+          "confidence": 0.7
+        },
+        {
+          "word": " infinity",
+          "begin": 0.75,
+          "end": 1.47,
+          "confidence": 0.4
+        }
+      ],
+      "speaker": "not_activated",
+      "channel": "channel_0",
+      "original_language": "en"
+    },
+    {
+      "time_begin": 2.13,
+      "time_end": 5.19,
+      "transcription": "In 'n tyd wanneer minder meer is",
+      "language": "afrikaans",
+      "confidence": 0.65,
+      "words": [
+        {
+          "word": " in",
+          "begin": 2.13,
+          "end": 2.65,
+          "confidence": 0.59
+        },
+        {
+          "word": " a",
+          "begin": 2.65,
+          "end": 2.87,
+          "confidence": 0.99
+        },
+        {
+          "word": " time",
+          "begin": 2.87,
+          "end": 3.33,
+          "confidence": 0.82
+        },
+        {
+          "word": " when",
+          "begin": 3.33,
+          "end": 3.79,
+          "confidence": 0.86
+        },
+        {
+          "word": " less",
+          "begin": 3.79,
+          "end": 4.07,
+          "confidence": 0.87
+        },
+        {
+          "word": " is",
+          "begin": 4.07,
+          "end": 4.41,
+          "confidence": 0.91
+        },
+        {
+          "word": " more.",
+          "begin": 4.41,
+          "end": 4.6899999999999995,
+          "confidence": 0.88
+        }
+      ],
+      "speaker": "not_activated",
+      "channel": "channel_0",
+      "original_language": "en"
+    },
+    {
+      "time_begin": 5.52,
+      "time_end": 20.4,
+      "transcription": "Waar te veel nooit genoeg is, is daar altyd hoop vir die toekoms nie, die toekoms kan van die verlede lees nie, die verlede voorspel die heden, en die heden is nog nie geskryf nie.",
+      "language": "afrikaans",
+      "confidence": 0.75,
+      "words": [
+        {
+          "word": " Where",
+          "begin": 5.52,
+          "end": 5.76,
+          "confidence": 0.51
+        },
+        {
+          "word": " too",
+          "begin": 5.76,
+          "end": 6.1,
+          "confidence": 0.8
+        },
+        {
+          "word": " much",
+          "begin": 6.1,
+          "end": 6.4799999999999995,
+          "confidence": 0.81
+        },
+        {
+          "word": " is",
+          "begin": 6.4799999999999995,
+          "end": 6.92,
+          "confidence": 0.9
+        },
+        {
+          "word": " never",
+          "begin": 6.92,
+          "end": 7.26,
+          "confidence": 0.88
+        },
+        {
+          "word": " enough,",
+          "begin": 7.26,
+          "end": 7.819999999999999,
+          "confidence": 0.77
+        },
+        {
+          "word": " there",
+          "begin": 8.62,
+          "end": 8.7,
+          "confidence": 0.81
+        },
+        {
+          "word": " is",
+          "begin": 8.7,
+          "end": 8.959999999999999,
+          "confidence": 0.84
+        },
+        {
+          "word": " always",
+          "begin": 8.959999999999999,
+          "end": 9.459999999999999,
+          "confidence": 0.74
+        },
+        {
+          "word": " hope",
+          "begin": 9.459999999999999,
+          "end": 9.8,
+          "confidence": 0.83
+        },
+        {
+          "word": " for",
+          "begin": 9.8,
+          "end": 10.12,
+          "confidence": 0.9
+        },
+        {
+          "word": " the",
+          "begin": 10.12,
+          "end": 10.32,
+          "confidence": 0.82
+        },
+        {
+          "word": " future.",
+          "begin": 10.32,
+          "end": 10.76,
+          "confidence": 0.93
+        },
+        {
+          "word": " The",
+          "begin": 11.8,
+          "end": 11.899999999999999,
+          "confidence": 0.82
+        },
+        {
+          "word": " future",
+          "begin": 11.899999999999999,
+          "end": 12.219999999999999,
+          "confidence": 0.94
+        },
+        {
+          "word": " can",
+          "begin": 12.219999999999999,
+          "end": 12.6,
+          "confidence": 0.9
+        },
+        {
+          "word": " be",
+          "begin": 12.6,
+          "end": 12.86,
+          "confidence": 0.91
+        },
+        {
+          "word": " read",
+          "begin": 12.86,
+          "end": 13.059999999999999,
+          "confidence": 0.9
+        },
+        {
+          "word": " from",
+          "begin": 13.059999999999999,
+          "end": 13.34,
+          "confidence": 0.82
+        },
+        {
+          "word": " the",
+          "begin": 13.34,
+          "end": 13.559999999999999,
+          "confidence": 0.82
+        },
+        {
+          "word": " past.",
+          "begin": 13.559999999999999,
+          "end": 14.139999999999999,
+          "confidence": 0.81
+        },
+        {
+          "word": " The",
+          "begin": 14.68,
+          "end": 14.78,
+          "confidence": 0.81
+        },
+        {
+          "word": " past",
+          "begin": 14.78,
+          "end": 15.34,
+          "confidence": 0.82
+        },
+        {
+          "word": " foreshadows",
+          "begin": 15.34,
+          "end": 16.119999999999997,
+          "confidence": 0.89
+        },
+        {
+          "word": " the",
+          "begin": 16.119999999999997,
+          "end": 16.46,
+          "confidence": 0.81
+        },
+        {
+          "word": " present,",
+          "begin": 16.46,
+          "end": 17.02,
+          "confidence": 0.8
+        },
+        {
+          "word": " and",
+          "begin": 17.439999999999998,
+          "end": 17.72,
+          "confidence": 0.89
+        },
+        {
+          "word": " the",
+          "begin": 17.72,
+          "end": 17.939999999999998,
+          "confidence": 0.82
+        },
+        {
+          "word": " present",
+          "begin": 17.939999999999998,
+          "end": 18.38,
+          "confidence": 0.8
+        },
+        {
+          "word": " hasn't",
+          "begin": 18.38,
+          "end": 18.939999999999998,
+          "confidence": 0.93
+        },
+        {
+          "word": " been",
+          "begin": 18.939999999999998,
+          "end": 19.240000000000002,
+          "confidence": 0.82
+        },
+        {
+          "word": " written",
+          "begin": 19.240000000000002,
+          "end": 19.46,
+          "confidence": 0.86
+        },
+        {
+          "word": " yet.",
+          "begin": 19.46,
+          "end": 19.96,
+          "confidence": 0.91
+        }
+      ],
+      "speaker": "not_activated",
+      "channel": "channel_0",
+      "original_language": "en"
+    }
+  ],
+  "prediction_raw": {
+    "metadata": {
+      "total_speech_duration": 19.919999999999998,
+      "total_speech_duration_channel_0": 19.919999999999998,
+      "translation_time": 0.7530639171600342,
+      "audioConversionTime": 0.2638227939605713,
+      "vadTime": 0.007440090179443359,
+      "inferenceTime": 1.9177148342132568,
+      "diarizationTime": 0.0000050067901611328125,
+      "totalTranscriptionTime": 2.1889827251434326,
+      "nbSilentChannels": 1,
+      "nbSimilarChannels": 0,
+      "providedFileMetadata": {
+        "nb channels": 1,
+        "sample rate": 44100,
+        "sample width": 16,
+        "original file type": "audio"
+      }
+    },
+    "transcription": [
+      {
+        "time_begin": 0.09,
+        "time_end": 2.07,
+        "transcription": "Verdeling van die eindeloosheid",
+        "language": "afrikaans",
+        "confidence": 0.55,
+        "words": [
+          {
+            "word": " Split",
+            "begin": 0.09,
+            "end": 0.75,
+            "confidence": 0.7
+          },
+          {
+            "word": " infinity",
+            "begin": 0.75,
+            "end": 1.47,
+            "confidence": 0.4
+          }
+        ],
+        "speaker": "not_activated",
+        "channel": "channel_0",
+        "original_language": "en"
+      },
+      {
+        "time_begin": 2.13,
+        "time_end": 5.19,
+        "transcription": "In 'n tyd wanneer minder meer is",
+        "language": "afrikaans",
+        "confidence": 0.65,
+        "words": [
+          {
+            "word": " in",
+            "begin": 2.13,
+            "end": 2.65,
+            "confidence": 0.59
+          },
+          {
+            "word": " a",
+            "begin": 2.65,
+            "end": 2.87,
+            "confidence": 0.99
+          },
+          {
+            "word": " time",
+            "begin": 2.87,
+            "end": 3.33,
+            "confidence": 0.82
+          },
+          {
+            "word": " when",
+            "begin": 3.33,
+            "end": 3.79,
+            "confidence": 0.86
+          },
+          {
+            "word": " less",
+            "begin": 3.79,
+            "end": 4.07,
+            "confidence": 0.87
+          },
+          {
+            "word": " is",
+            "begin": 4.07,
+            "end": 4.41,
+            "confidence": 0.91
+          },
+          {
+            "word": " more.",
+            "begin": 4.41,
+            "end": 4.6899999999999995,
+            "confidence": 0.88
+          }
+        ],
+        "speaker": "not_activated",
+        "channel": "channel_0",
+        "original_language": "en"
+      },
+      {
+        "time_begin": 5.52,
+        "time_end": 20.4,
+        "transcription": "Waar te veel nooit genoeg is, is daar altyd hoop vir die toekoms nie, die toekoms kan van die verlede lees nie, die verlede voorspel die heden, en die heden is nog nie geskryf nie.",
+        "language": "afrikaans",
+        "confidence": 0.75,
+        "words": [
+          {
+            "word": " Where",
+            "begin": 5.52,
+            "end": 5.76,
+            "confidence": 0.51
+          },
+          {
+            "word": " too",
+            "begin": 5.76,
+            "end": 6.1,
+            "confidence": 0.8
+          },
+          {
+            "word": " much",
+            "begin": 6.1,
+            "end": 6.4799999999999995,
+            "confidence": 0.81
+          },
+          {
+            "word": " is",
+            "begin": 6.4799999999999995,
+            "end": 6.92,
+            "confidence": 0.9
+          },
+          {
+            "word": " never",
+            "begin": 6.92,
+            "end": 7.26,
+            "confidence": 0.88
+          },
+          {
+            "word": " enough,",
+            "begin": 7.26,
+            "end": 7.819999999999999,
+            "confidence": 0.77
+          },
+          {
+            "word": " there",
+            "begin": 8.62,
+            "end": 8.7,
+            "confidence": 0.81
+          },
+          {
+            "word": " is",
+            "begin": 8.7,
+            "end": 8.959999999999999,
+            "confidence": 0.84
+          },
+          {
+            "word": " always",
+            "begin": 8.959999999999999,
+            "end": 9.459999999999999,
+            "confidence": 0.74
+          },
+          {
+            "word": " hope",
+            "begin": 9.459999999999999,
+            "end": 9.8,
+            "confidence": 0.83
+          },
+          {
+            "word": " for",
+            "begin": 9.8,
+            "end": 10.12,
+            "confidence": 0.9
+          },
+          {
+            "word": " the",
+            "begin": 10.12,
+            "end": 10.32,
+            "confidence": 0.82
+          },
+          {
+            "word": " future.",
+            "begin": 10.32,
+            "end": 10.76,
+            "confidence": 0.93
+          },
+          {
+            "word": " The",
+            "begin": 11.8,
+            "end": 11.899999999999999,
+            "confidence": 0.82
+          },
+          {
+            "word": " future",
+            "begin": 11.899999999999999,
+            "end": 12.219999999999999,
+            "confidence": 0.94
+          },
+          {
+            "word": " can",
+            "begin": 12.219999999999999,
+            "end": 12.6,
+            "confidence": 0.9
+          },
+          {
+            "word": " be",
+            "begin": 12.6,
+            "end": 12.86,
+            "confidence": 0.91
+          },
+          {
+            "word": " read",
+            "begin": 12.86,
+            "end": 13.059999999999999,
+            "confidence": 0.9
+          },
+          {
+            "word": " from",
+            "begin": 13.059999999999999,
+            "end": 13.34,
+            "confidence": 0.82
+          },
+          {
+            "word": " the",
+            "begin": 13.34,
+            "end": 13.559999999999999,
+            "confidence": 0.82
+          },
+          {
+            "word": " past.",
+            "begin": 13.559999999999999,
+            "end": 14.139999999999999,
+            "confidence": 0.81
+          },
+          {
+            "word": " The",
+            "begin": 14.68,
+            "end": 14.78,
+            "confidence": 0.81
+          },
+          {
+            "word": " past",
+            "begin": 14.78,
+            "end": 15.34,
+            "confidence": 0.82
+          },
+          {
+            "word": " foreshadows",
+            "begin": 15.34,
+            "end": 16.119999999999997,
+            "confidence": 0.89
+          },
+          {
+            "word": " the",
+            "begin": 16.119999999999997,
+            "end": 16.46,
+            "confidence": 0.81
+          },
+          {
+            "word": " present,",
+            "begin": 16.46,
+            "end": 17.02,
+            "confidence": 0.8
+          },
+          {
+            "word": " and",
+            "begin": 17.439999999999998,
+            "end": 17.72,
+            "confidence": 0.89
+          },
+          {
+            "word": " the",
+            "begin": 17.72,
+            "end": 17.939999999999998,
+            "confidence": 0.82
+          },
+          {
+            "word": " present",
+            "begin": 17.939999999999998,
+            "end": 18.38,
+            "confidence": 0.8
+          },
+          {
+            "word": " hasn't",
+            "begin": 18.38,
+            "end": 18.939999999999998,
+            "confidence": 0.93
+          },
+          {
+            "word": " been",
+            "begin": 18.939999999999998,
+            "end": 19.240000000000002,
+            "confidence": 0.82
+          },
+          {
+            "word": " written",
+            "begin": 19.240000000000002,
+            "end": 19.46,
+            "confidence": 0.86
+          },
+          {
+            "word": " yet.",
+            "begin": 19.46,
+            "end": 19.96,
+            "confidence": 0.91
+          }
+        ],
+        "speaker": "not_activated",
+        "channel": "channel_0",
+        "original_language": "en"
+      }
+    ],
+    "chapterization": "not_activated",
+    "summarization": "not_activated"
+  }
+}
+`
+
+## Transcription delays
+
+Adding the translation will introduce potential latency in the transcription but remains small (est. 75ms / sentence).

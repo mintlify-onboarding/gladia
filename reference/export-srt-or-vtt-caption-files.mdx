@@ -1,0 +1,764 @@
+---
+title: "Export SRT or VTT Caption Files"
+---
+
+## What are SRT and VTT Caption files?
+
+SRT and VTT are standard caption file formats for displaying video subtitles or captions. SRT stands for SubRip Subtitle File, while VTT stands for Web Video Text Tracks. Both formats contain time-stamped text entries that can be displayed in sync with a video.
+
+### SRT Files
+
+SRT files have the extension ".srt" and contain plain text entries with a specific format. Each entry has three parts: 
+
+* an index number,
+* the timecode for when the subtitle should appear, and
+* the subtitle text.
+
+#### Example of SRT file
+
+```SRT SRT
+1
+00:00:00,000 --> 00:00:05,000
+[Music playing]
+
+2
+00:00:10,000 --> 00:00:15,000
+Welcome to our YouTube channel!
+
+3
+00:00:20,000 --> 00:00:25,000
+Today, we're going to learn about
+
+4
+00:00:27,000 --> 00:00:32,000
+the fascinating world of astronomy
+```
+
+#### Calling the API
+
+```bash shell
+curl -X 'POST' \
+    'https://api.gladia.io/audio/text/audio-transcription/' \
+    -H 'accept: application/json' \
+    -H 'x-gladia-key: <your_api_key>' \
+    -H 'Content-Type: multipart/form-data' \
+    -F "audio_url=http://files.gladia.io/example/audio-transcription/split_infinity.wav" \
+    -F "output_format=srt"
+```
+
+#### Expected Results
+
+```json json
+{
+  "prediction": "1\n00:00:01,170 --> 00:00:07,790\n Split infinity in a time when less is more, where too much is never enough.\n\n2\n00:00:08,610 --> 00:00:14,130\n There is always hope for the future. The future can be read from the past.\n\n3\n00:00:14,650 --> 00:00:19,970\n The past foreshadows the present and the present hasn't been written yet.\n",
+  "prediction_raw": {
+    "transcription": [
+      {
+        "words": [
+          {
+            "word": " Split",
+            "time_begin": 1.1780000000000002,
+            "time_end": 1.8980000000000001,
+            "confidence": 0.49
+          },
+          {
+            "word": " infinity",
+            "time_begin": 1.8980000000000001,
+            "time_end": 1.538,
+            "confidence": 0.72
+          },
+          {
+            "word": " in",
+            "time_begin": 1.538,
+            "time_end": 2.618,
+            "confidence": 0.34
+          },
+          {
+            "word": " a",
+            "time_begin": 2.618,
+            "time_end": 2.8779999999999997,
+            "confidence": 1
+          },
+          {
+            "word": " time",
+            "time_begin": 2.8779999999999997,
+            "time_end": 3.318,
+            "confidence": 0.81
+          },
+          {
+            "word": " when",
+            "time_begin": 3.318,
+            "time_end": 3.778,
+            "confidence": 0.86
+          },
+          {
+            "word": " less",
+            "time_begin": 3.778,
+            "time_end": 4.058,
+            "confidence": 0.87
+          },
+          {
+            "word": " is",
+            "time_begin": 4.058,
+            "time_end": 4.378,
+            "confidence": 0.9
+          },
+          {
+            "word": " more,",
+            "time_begin": 4.378,
+            "time_end": 4.938,
+            "confidence": 0.88
+          },
+          {
+            "word": " where",
+            "time_begin": 5.638,
+            "time_end": 5.718,
+            "confidence": 0.89
+          },
+          {
+            "word": " too",
+            "time_begin": 5.718,
+            "time_end": 6.138,
+            "confidence": 0.8
+          },
+          {
+            "word": " much",
+            "time_begin": 6.138,
+            "time_end": 6.478,
+            "confidence": 0.81
+          },
+          {
+            "word": " is",
+            "time_begin": 6.478,
+            "time_end": 6.918,
+            "confidence": 0.9
+          },
+          {
+            "word": " never",
+            "time_begin": 6.918,
+            "time_end": 7.258,
+            "confidence": 0.88
+          },
+          {
+            "word": " enough.",
+            "time_begin": 7.258,
+            "time_end": 7.798,
+            "confidence": 0.78
+          }
+        ],
+        "transcription": " Split infinity in a time when less is more, where too much is never enough.",
+        "language": "en",
+        "time_begin": 1.1780000000000002,
+        "time_end": 7.798,
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0"
+      },
+      {
+        "words": [
+          {
+            "word": " There",
+            "time_begin": 8.618,
+            "time_end": 8.678,
+            "confidence": 0.8
+          },
+          {
+            "word": " is",
+            "time_begin": 8.678,
+            "time_end": 8.958,
+            "confidence": 0.89
+          },
+          {
+            "word": " always",
+            "time_begin": 8.958,
+            "time_end": 9.478000000000002,
+            "confidence": 0.76
+          },
+          {
+            "word": " hope",
+            "time_begin": 9.478000000000002,
+            "time_end": 9.778,
+            "confidence": 0.83
+          },
+          {
+            "word": " for",
+            "time_begin": 9.778,
+            "time_end": 10.118,
+            "confidence": 0.9
+          },
+          {
+            "word": " the",
+            "time_begin": 10.118,
+            "time_end": 10.358,
+            "confidence": 0.82
+          },
+          {
+            "word": " future.",
+            "time_begin": 10.358,
+            "time_end": 10.738000000000001,
+            "confidence": 0.94
+          },
+          {
+            "word": " The",
+            "time_begin": 11.738000000000001,
+            "time_end": 11.898000000000001,
+            "confidence": 0.81
+          },
+          {
+            "word": " future",
+            "time_begin": 11.898000000000001,
+            "time_end": 12.218,
+            "confidence": 0.94
+          },
+          {
+            "word": " can",
+            "time_begin": 12.218,
+            "time_end": 12.578000000000001,
+            "confidence": 0.9
+          },
+          {
+            "word": " be",
+            "time_begin": 12.578000000000001,
+            "time_end": 12.838000000000001,
+            "confidence": 0.91
+          },
+          {
+            "word": " read",
+            "time_begin": 12.838000000000001,
+            "time_end": 13.038,
+            "confidence": 0.9
+          },
+          {
+            "word": " from",
+            "time_begin": 13.038,
+            "time_end": 13.338000000000001,
+            "confidence": 0.82
+          },
+          {
+            "word": " the",
+            "time_begin": 13.338000000000001,
+            "time_end": 13.558000000000002,
+            "confidence": 0.82
+          },
+          {
+            "word": " past.",
+            "time_begin": 13.558000000000002,
+            "time_end": 14.138,
+            "confidence": 0.81
+          }
+        ],
+        "transcription": " There is always hope for the future. The future can be read from the past.",
+        "language": "en",
+        "time_begin": 8.618,
+        "time_end": 14.138,
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0"
+      },
+      {
+        "words": [
+          {
+            "word": " The",
+            "time_begin": 14.658000000000001,
+            "time_end": 14.778,
+            "confidence": 0.81
+          },
+          {
+            "word": " past",
+            "time_begin": 14.778,
+            "time_end": 15.358,
+            "confidence": 0.82
+          },
+          {
+            "word": " foreshadows",
+            "time_begin": 15.358,
+            "time_end": 16.098,
+            "confidence": 0.89
+          },
+          {
+            "word": " the",
+            "time_begin": 16.098,
+            "time_end": 16.458,
+            "confidence": 0.81
+          },
+          {
+            "word": " present",
+            "time_begin": 16.458,
+            "time_end": 17.018,
+            "confidence": 0.79
+          },
+          {
+            "word": " and",
+            "time_begin": 17.018,
+            "time_end": 17.698,
+            "confidence": 0.33
+          },
+          {
+            "word": " the",
+            "time_begin": 17.698,
+            "time_end": 17.918,
+            "confidence": 0.81
+          },
+          {
+            "word": " present",
+            "time_begin": 17.918,
+            "time_end": 18.378,
+            "confidence": 0.79
+          },
+          {
+            "word": " hasn't",
+            "time_begin": 18.378,
+            "time_end": 18.918,
+            "confidence": 0.93
+          },
+          {
+            "word": " been",
+            "time_begin": 18.918,
+            "time_end": 19.218,
+            "confidence": 0.82
+          },
+          {
+            "word": " written",
+            "time_begin": 19.218,
+            "time_end": 19.458,
+            "confidence": 0.86
+          },
+          {
+            "word": " yet.",
+            "time_begin": 19.458,
+            "time_end": 19.977999999999998,
+            "confidence": 0.91
+          }
+        ],
+        "transcription": " The past foreshadows the present and the present hasn't been written yet.",
+        "language": "en",
+        "time_begin": 14.658000000000001,
+        "time_end": 19.977999999999998,
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0"
+      }
+    ],
+    "metadata": {
+      "provided_file_metadata": {
+        "nb_channels": 1,
+        "sample_rate": 44100,
+        "sample_width": 16,
+        "duration": 20.555465,
+        "original_file_type": "audio",
+        "number_similar_channels": 0
+      },
+      "nb_silent_channels": -1,
+      "total_speech_duration": 17.459999999999997,
+      "audio_conversion_time": 0.5775299072265625,
+      "vad_time": 0.13806915283203125,
+      "inference_time": 2.961864948272705,
+      "diarization_time": 0.00022459030151367188,
+      "translation_time": 7.152557373046875e-7,
+      "emotion_time": 2.384185791015625e-7,
+      "summarization_time": 4.76837158203125e-7,
+      "chapterization_time": 2.384185791015625e-7,
+      "total_transcription_time": 6.994915246963501
+    },
+    "speaker_mapping": [
+      {
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0",
+        "time_begin": 1.1780000000000002,
+        "time_end": 7.798
+      },
+      {
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0",
+        "time_begin": 8.618,
+        "time_end": 14.138
+      },
+      {
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0",
+        "time_begin": 14.658000000000001,
+        "time_end": 19.977999999999998
+      }
+    ]
+  }
+}
+```
+
+### VTT Files
+
+VTT files have the extension ".vtt" and are similar to SRT files but use a slightly different format. Each entry in a VTT file consists of a timecode for when the subtitle should appear, the subtitle text, and optional settings for the subtitle, such as text color and background color.
+
+#### Example of VTT file
+
+```VTT VTT
+WEBVTT
+
+STYLE
+::cue(.red) {
+color: #ff0000;
+text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+::cue(.bold) {
+font-weight: bold;
+}
+
+NOTE This is a fake VTT file with color and other options
+
+00:00:01.000 --> 00:00:05.000 class:red
+Hello, this is a <span class="bold">fake</span> VTT file.
+
+00:00:05.000 --> 00:00:10.000 class:bold
+It is generated by an AI language model called ChatGPT.
+
+00:00:10.000 --> 00:00:15.000
+This VTT file is not associated with any actual media content.
+
+00:00:15.000 --> 00:00:20.000 class:red bold
+It is solely created for demonstration purposes.
+
+NOTE This VTT file showcases the use of the ::cue() pseudo-element to apply different styles to the captions based on their classes, and the use of the NOTE keyword to add comments.
+```
+
+#### Calling the API
+
+```bash shell
+curl -X 'POST' \
+    'https://api.gladia.io/audio/text/audio-transcription/' \
+    -H 'accept: application/json' \
+    -H 'x-gladia-key: <your_api_key>' \
+    -H 'Content-Type: multipart/form-data' \
+    -F "audio_url=http://files.gladia.io/example/audio-transcription/split_infinity.wav" \
+    -F "output_format=vtt"
+```
+
+#### Expected Results
+
+```json json
+{
+  "prediction": "WEBVTT\n\n1\n00:00:01.178 --> 00:00:07.798\n Split infinity in a time when less is more, where too much is never enough.\n\n2\n00:00:08.618 --> 00:00:14.137\n There is always hope for the future. The future can be read from the past.\n\n3\n00:00:14.658 --> 00:00:19.977\n The past foreshadows the present and the present hasn't been written yet.\n",
+  "prediction_raw": {
+    "transcription": [
+      {
+        "words": [
+          {
+            "word": " Split",
+            "time_begin": 1.1780000000000002,
+            "time_end": 1.8980000000000001,
+            "confidence": 0.49
+          },
+          {
+            "word": " infinity",
+            "time_begin": 1.8980000000000001,
+            "time_end": 1.538,
+            "confidence": 0.72
+          },
+          {
+            "word": " in",
+            "time_begin": 1.538,
+            "time_end": 2.618,
+            "confidence": 0.34
+          },
+          {
+            "word": " a",
+            "time_begin": 2.618,
+            "time_end": 2.8779999999999997,
+            "confidence": 1
+          },
+          {
+            "word": " time",
+            "time_begin": 2.8779999999999997,
+            "time_end": 3.318,
+            "confidence": 0.81
+          },
+          {
+            "word": " when",
+            "time_begin": 3.318,
+            "time_end": 3.778,
+            "confidence": 0.86
+          },
+          {
+            "word": " less",
+            "time_begin": 3.778,
+            "time_end": 4.058,
+            "confidence": 0.87
+          },
+          {
+            "word": " is",
+            "time_begin": 4.058,
+            "time_end": 4.378,
+            "confidence": 0.9
+          },
+          {
+            "word": " more,",
+            "time_begin": 4.378,
+            "time_end": 4.938,
+            "confidence": 0.88
+          },
+          {
+            "word": " where",
+            "time_begin": 5.638,
+            "time_end": 5.718,
+            "confidence": 0.89
+          },
+          {
+            "word": " too",
+            "time_begin": 5.718,
+            "time_end": 6.138,
+            "confidence": 0.8
+          },
+          {
+            "word": " much",
+            "time_begin": 6.138,
+            "time_end": 6.478,
+            "confidence": 0.81
+          },
+          {
+            "word": " is",
+            "time_begin": 6.478,
+            "time_end": 6.918,
+            "confidence": 0.9
+          },
+          {
+            "word": " never",
+            "time_begin": 6.918,
+            "time_end": 7.258,
+            "confidence": 0.88
+          },
+          {
+            "word": " enough.",
+            "time_begin": 7.258,
+            "time_end": 7.798,
+            "confidence": 0.78
+          }
+        ],
+        "transcription": " Split infinity in a time when less is more, where too much is never enough.",
+        "language": "en",
+        "time_begin": 1.1780000000000002,
+        "time_end": 7.798,
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0"
+      },
+      {
+        "words": [
+          {
+            "word": " There",
+            "time_begin": 8.618,
+            "time_end": 8.678,
+            "confidence": 0.8
+          },
+          {
+            "word": " is",
+            "time_begin": 8.678,
+            "time_end": 8.958,
+            "confidence": 0.89
+          },
+          {
+            "word": " always",
+            "time_begin": 8.958,
+            "time_end": 9.478000000000002,
+            "confidence": 0.76
+          },
+          {
+            "word": " hope",
+            "time_begin": 9.478000000000002,
+            "time_end": 9.778,
+            "confidence": 0.83
+          },
+          {
+            "word": " for",
+            "time_begin": 9.778,
+            "time_end": 10.118,
+            "confidence": 0.9
+          },
+          {
+            "word": " the",
+            "time_begin": 10.118,
+            "time_end": 10.358,
+            "confidence": 0.82
+          },
+          {
+            "word": " future.",
+            "time_begin": 10.358,
+            "time_end": 10.738000000000001,
+            "confidence": 0.94
+          },
+          {
+            "word": " The",
+            "time_begin": 11.738000000000001,
+            "time_end": 11.898000000000001,
+            "confidence": 0.81
+          },
+          {
+            "word": " future",
+            "time_begin": 11.898000000000001,
+            "time_end": 12.218,
+            "confidence": 0.94
+          },
+          {
+            "word": " can",
+            "time_begin": 12.218,
+            "time_end": 12.578000000000001,
+            "confidence": 0.9
+          },
+          {
+            "word": " be",
+            "time_begin": 12.578000000000001,
+            "time_end": 12.838000000000001,
+            "confidence": 0.91
+          },
+          {
+            "word": " read",
+            "time_begin": 12.838000000000001,
+            "time_end": 13.038,
+            "confidence": 0.9
+          },
+          {
+            "word": " from",
+            "time_begin": 13.038,
+            "time_end": 13.338000000000001,
+            "confidence": 0.82
+          },
+          {
+            "word": " the",
+            "time_begin": 13.338000000000001,
+            "time_end": 13.558000000000002,
+            "confidence": 0.82
+          },
+          {
+            "word": " past.",
+            "time_begin": 13.558000000000002,
+            "time_end": 14.138,
+            "confidence": 0.81
+          }
+        ],
+        "transcription": " There is always hope for the future. The future can be read from the past.",
+        "language": "en",
+        "time_begin": 8.618,
+        "time_end": 14.138,
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0"
+      },
+      {
+        "words": [
+          {
+            "word": " The",
+            "time_begin": 14.658000000000001,
+            "time_end": 14.778,
+            "confidence": 0.81
+          },
+          {
+            "word": " past",
+            "time_begin": 14.778,
+            "time_end": 15.358,
+            "confidence": 0.82
+          },
+          {
+            "word": " foreshadows",
+            "time_begin": 15.358,
+            "time_end": 16.098,
+            "confidence": 0.89
+          },
+          {
+            "word": " the",
+            "time_begin": 16.098,
+            "time_end": 16.458,
+            "confidence": 0.81
+          },
+          {
+            "word": " present",
+            "time_begin": 16.458,
+            "time_end": 17.018,
+            "confidence": 0.79
+          },
+          {
+            "word": " and",
+            "time_begin": 17.018,
+            "time_end": 17.698,
+            "confidence": 0.33
+          },
+          {
+            "word": " the",
+            "time_begin": 17.698,
+            "time_end": 17.918,
+            "confidence": 0.81
+          },
+          {
+            "word": " present",
+            "time_begin": 17.918,
+            "time_end": 18.378,
+            "confidence": 0.79
+          },
+          {
+            "word": " hasn't",
+            "time_begin": 18.378,
+            "time_end": 18.918,
+            "confidence": 0.93
+          },
+          {
+            "word": " been",
+            "time_begin": 18.918,
+            "time_end": 19.218,
+            "confidence": 0.82
+          },
+          {
+            "word": " written",
+            "time_begin": 19.218,
+            "time_end": 19.458,
+            "confidence": 0.86
+          },
+          {
+            "word": " yet.",
+            "time_begin": 19.458,
+            "time_end": 19.977999999999998,
+            "confidence": 0.91
+          }
+        ],
+        "transcription": " The past foreshadows the present and the present hasn't been written yet.",
+        "language": "en",
+        "time_begin": 14.658000000000001,
+        "time_end": 19.977999999999998,
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0"
+      }
+    ],
+    "metadata": {
+      "provided_file_metadata": {
+        "nb_channels": 1,
+        "sample_rate": 44100,
+        "sample_width": 16,
+        "duration": 20.555465,
+        "original_file_type": "audio",
+        "number_similar_channels": 0
+      },
+      "nb_silent_channels": -1,
+      "total_speech_duration": 17.459999999999997,
+      "audio_conversion_time": 0.48610377311706543,
+      "vad_time": 0.14296197891235352,
+      "inference_time": 3.445634603500366,
+      "diarization_time": 0.00012826919555664062,
+      "translation_time": 4.76837158203125e-7,
+      "emotion_time": 2.384185791015625e-7,
+      "summarization_time": 0,
+      "chapterization_time": 2.384185791015625e-7,
+      "total_transcription_time": 7.091248989105225
+    },
+    "speaker_mapping": [
+      {
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0",
+        "time_begin": 1.1780000000000002,
+        "time_end": 7.798
+      },
+      {
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0",
+        "time_begin": 8.618,
+        "time_end": 14.138
+      },
+      {
+        "speaker": "speaker_not_activated",
+        "channel": "channel_0",
+        "time_begin": 14.658000000000001,
+        "time_end": 19.977999999999998
+      }
+    ]
+  }
+}
+```

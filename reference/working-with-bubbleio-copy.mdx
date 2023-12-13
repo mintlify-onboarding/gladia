@@ -1,0 +1,116 @@
+---
+title: "Setting up Bubble.io + Gladia's API Connector"
+---
+
+## Adding an API connector plugin
+
+First, you need to add a new plugin to your project by clicking **"+ Add plugins"**
+
+![](/images/reference/b58743e-image.png) 
+
+ Then, install the API Connector
+
+![](/images/reference/398e36c-image.png) 
+
+.API Connector allows you to seamlessly integrate external APIs into your Bubble application, enabling you to retrieve and send data, perform actions, and leverage the functionalities of various web services. We will use this feature to call Gladia's pre-recorded API to retrieve transcription.
+
+![](/images/reference/794bfd8-image.png) 
+
+## Configuring the API connector
+
+The easiest way to insert an API configuration without too much work is to copy-paste a cURL command.
+
+Click on import another call from cURL.
+
+![](/images/reference/06cf7a1-image.png) 
+
+In the popup, paste the following cURL command.
+
+Shell
+
+`curl -X POST \
+  -H 'x-gladia-key: YOUR_GLADIA_TOKEN' \
+  -H 'accept: application/json' \
+  -F '[[email protected]](/cdn-cgi/l/email-protection);type=audio/mp3' \
+  -F 'toggle_diarization=True' \
+  https://api.gladia.io/audio/text/audio-transcription/
+`
+
+![](/images/reference/1e63148-image.png) 
+
+## Adjust the API connector configuration
+
+### Set the shared Headers configuration
+
+1. change the **Authentication** method to **private key in header**
+2. add a key name in the header to be **x-gladia-key** and set the key value to be your free Gladia token available in the Gladia portal [https://app.gladia.io/](https://app.gladia.io/)
+3. add a shared header for all API call to be the **accept** response format to **application/json**
+![](/images/reference/5faa122-image.png) 
+
+### Set the shared Parameters configuration (optional)
+
+* Add a shared header for all calls to set the **toggle\_diarization** to **true** to activate the speaker separation.
+* Add a shared header for all calls to set the **language\_behaviour** to be the same for all API calls, such as **automatic multiple languages**, to ensure you activate the code-switching option (multi-lingual audio).
+![](/images/reference/2d02b70-image.png) 
+
+### Configure the Speech To Text API
+
+We will now set up 2 APIs. The first one will be configuring the file upload version using the **audio** field the second one will be the file URL version using **audio\_url** field.
+
+#### Using audio file upload version
+
+This one is meant to send a raw file using an upload component.
+
+Click expand to access the API configuration.
+
+![](/images/reference/956bbb1-image.png) 
+
+##### Adjust the API parameters
+
+1. Change **Use as** to **Action**
+2. Set the **Body type** to **Form-data**
+3. Add a new parameter named **audio**, then check the **Send file** option.
+
+![](/images/reference/71614fa-image.png)
+
+##### Initialize the call
+
+you are almost there: 
+
+1. you need to upload a file by clicking on the **Upload** field and select a valid audio file from your computer.
+2. Click Initialize call to force the first execution of the API to let Bubble self-discover the output JSON schema.
+
+![](/images/reference/a89d0be-image.png)
+
+When done performing the initialization with the API, the schema is displayed; click **Done**; you can now use Gladia's API in Bubble.
+
+![](/images/reference/8fdf405-image.png) 
+
+#### Using audio file URL version
+
+This one is meant to send just a like of a valid file available on the internet: this includes all [audio supported formats](/reference/supported-media-formats) or any [valid social media URL](/reference/supported-media-formats#supported-link-and-social-medias).
+
+Click expand to access the API configuration.
+
+![](/images/reference/956bbb1-image.png) 
+
+##### Adjust the API parameters
+
+1. Change **Use as** to **Action**
+2. Set the **Body type** to **Form-data**
+3. Add a new parameter named **audio\_url**, leave the value blank for now.
+
+![](/images/reference/0722b8c-image.png)
+
+##### Initialize the call
+
+you are almost there: 
+
+1. you need to give an example URL of a valid file to initialize the call; you could use, for instance: [http://files.gladia.io/example/audio-transcription/split\_infinity.wav](http://files.gladia.io/example/audio-transcription/split%5Finfinity.wav)
+2. Click Initialize call to force the first execution of the API to let Bubble self-discover the output JSON schema.
+
+![](/images/reference/e90a974-image.png)
+
+When done performing the initialization with the API, the schema is displayed; click **Done**; you can now use Gladia's API in Bubble.
+
+![](/images/reference/848cf42-image.png)

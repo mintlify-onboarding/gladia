@@ -1,0 +1,40 @@
+---
+title: "Error Codes"
+---
+
+Sending your requests, you could receive errors, depending on the issue:
+
+**400:**
+
+This status code is send if the inputs are malformed (if no audio or audio url is sent for example)
+
+**402:**
+
+Free tier maximum transcription hours exceeded. Wait for the next month for the quota to rest, or upgrade to pro for unlimited hours.
+
+**415:**
+
+_No audio in he file_: This message is returned when we didn't find any audio file from the inputs.
+
+**422:**
+
+_Couldn't reach provided url_: This error is returned when the data are well formatted but not processable.  
+This can happen if the audio url is not reachable for example, from a social media not supported or youtube videos with duration over 2 hours.
+
+**429:**
+
+Rate limit exceeded. The limits are:
+
+**Free plan**
+
+* 20 API calls / hour
+* 3 concurrent requests
+
+**Pro plan**
+
+* 200 API calls / minute
+* 15 concurrent requests
+
+**500:**
+
+These errors are not common and indicate a problem that appeared on our side. Do not hesitate to contact us if this error were to be returned.

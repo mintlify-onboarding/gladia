@@ -1,0 +1,234 @@
+---
+title: "Getting Started"
+description: Gladia.io offers an API powered by AI models to transcribe and comprehend audio/video files. The Quick Start page provides a brief overview of our services. 
+---
+
+Our dedicated team is available to assist with any inquiries related to our API, features, or documentation. You can contact us on [discord](https://discord.gg/UUd79ckzz9).
+
+## Getting your API key
+
+First, you need to create a Gladia account.
+
+Go to [https://app.gladia.io](https://app.gladia.io) and create an account using your email and password, or using your Google account. This will bring you to your home dashboard where you can find your API key.
+
+## Making your first API call
+
+here are several ways to make an API call.
+
+### Using Curl
+
+As you can already see in the graphic interface in [https://app.gladia.io](https://app.gladia.io), you can make transcription requests yourself using different languages. This is a curl request using audio-transcription:
+
+```bash Curl
+curl -X 'POST' \
+    'https://api.gladia.io/audio/text/audio-transcription/' \
+    -H 'accept: application/json' \
+    -H 'x-gladia-key: <your_api_key>' \
+    -H 'Content-Type: multipart/form-data' \
+    -F "audio_url=http://files.gladia.io/example/audio-transcription/split_infinity.wav"
+```
+
+You can now open a terminal and copy/paste the snippet containing your own API key.
+
+### Using other languages (Python, JavaScript, Php, ...)
+
+You can make requests using any languages you want.  
+Here, we will see an example using audio-transcription in different languages and libraries:
+
+<CodeGroup>
+
+```Python Python
+import requests
+
+headers = {
+    'accept': 'application/json',
+    'x-gladia-key': '<your_api_key>',
+}
+
+files = {
+    'audio_url': (None, 'http://files.gladia.io/example/audio-transcription/split_infinity.wav')
+}
+
+response = requests.post('https://api.gladia.io/audio/text/audio-transcription/', headers=headers, files=files)
+```
+
+```java JavaScript - Fetch
+import fetch, { FormData } from 'node-fetch';
+
+const form = new FormData();
+form.append('audio_url', 'http://files.gladia.io/example/audio-transcription/split_infinity.wav');
+
+fetch('https://api.gladia.io/audio/text/audio-transcription/', {
+    method: 'POST',
+    headers: {
+        'accept': 'application/json',
+        'x-gladia-key': '<your_api_key>',
+        'Content-Type': 'multipart/form-data'
+    },
+    body: form
+});
+```
+
+```java JavaScript - Axios
+const axios = require('axios');
+const FormData = require('form-data');
+
+const form = new FormData();
+form.append('audio_url', 'http://files.gladia.io/example/audio-transcription/split_infinity.wav');
+
+const response = await axios.post(
+    'https://api.gladia.io/audio/text/audio-transcription/',
+    form,
+    {
+        headers: {
+            ...form.getHeaders(),
+            'accept': 'application/json',
+            'x-gladia-key': '<your_api_key>',
+            'Content-Type': 'multipart/form-data'
+        }
+    }
+);
+```
+
+```Php Php
+<?php
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://api.gladia.io/audio/text/audio-transcription/');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'accept' => 'application/json',
+    'x-gladia-key' => '<your_api_key>',
+    'Content-Type' => 'multipart/form-data',
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, [
+    'audio_url' => 'http://files.gladia.io/example/audio-transcription/split_infinity.wav',
+]);
+
+$response = curl_exec($ch);
+
+curl_close($ch);
+```
+</CodeGroup>
+
+<br />
+
+<Warning>
+As in the previous part, do not forget to replace `<your\_api\_key>`.
+</Warning>
+### Using the CLI (Command-Line Interface)
+
+The Gladia CLI is a command-line interface tool that allows developers to transcribe audio files or URLs using the Gladia API. It supports several features such as noise reduction, speaker diarization, direct translation, text emotion recognition, and summarization.
+
+#### Install the binary directly
+
+#### Linux X64
+
+[https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-amd64](https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-amd64)
+
+#### Linux X32
+
+[https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-linux-armv7](https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-linux-armv7)
+
+#### Linux ARM
+
+[https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-arm64](https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-arm64)
+
+#### MacOS Intel
+
+[https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-amd64](https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-amd64)
+
+#### MacOS ARM
+
+[https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-arm64](https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-darwin-arm64)
+
+#### Windows
+
+[https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-windows-amd64.exe](https://github.com/gladiaio/gladia-cli/raw/main/go/dist/gladia-windows-amd64.exe)
+
+#### Build from source
+
+<Warning>
+At the time where this is being written, only audio-transcription is supported.
+</Warning>
+
+First, you need to download the following repository: [https://github.com/gladiaio/gladia-cli](https://github.com/gladiaio/gladia-cli)
+
+#### Authentication
+
+To authenticate, be sure to have an API key. Run the following if you want to save the key:
+
+```terminal Terminal
+./gladia_cli --gladia-key MY_GLADIA_KEY --save-gladia-key
+```
+
+or use it inline for each request:
+
+```terminal Terminal
+./gladia_cli --gladia-key MY_GLADIA_KEY --OTHER_OPTIONS ...
+```
+
+#### How to use the CLI
+
+```Shell Shell
+  -audio-file string
+    	Path to the audio file
+  -audio-url string
+    	URL of the audio file
+  -diarization
+    	Enable diarization
+  -diarization-max-speakers int
+    	Maximum number of speakers for diarization
+  -direct-translate
+    	Enable direct translation
+  -direct-translate-language string
+    	Language for direct translation
+  -gladia-key string
+    	Gladia API key
+  -language string
+    	Language for transcription (default "english")
+  -language-behaviour string
+    	Language behavior (manual, automatic single language, automatic multiple languages) 
+			(default "automatic multiple languages")
+  -noise-reduction
+    	Enable noise reduction
+  -output-format string
+    	Output format (table, csv, json, srt, vtt, txt) (default "table")
+  -save-gladia-key
+    	Save Gladia API key
+  -transcription-hint string
+    	Transcription hint
+  -transcription-language-list
+    	List available languages for transcription
+  -translation-language-list
+    	List available languages for translation
+```
+
+#### Basic example
+
+The following is an example of using the Gladia CLI to transcribe an audio file:
+
+```Terminal Terminal
+./gladia_cli --audio-url http://files.gladia.io/example/audio-transcription/split_infinity.wav
++------------+----------+----------+-----------------------+--------------------------------+
+| TIME BEGIN | TIME END | LANGUAGE |        SPEAKER        |         TRANSCRIPTION          |
++------------+----------+----------+-----------------------+--------------------------------+
+|       0.18 |     4.68 | en       | speaker_not_activated | Split infinity in a time when  |
+|            |          |          |                       | less is more,                  |
+|       5.52 |     7.76 | en       | speaker_not_activated | where too much is never        |
+|            |          |          |                       | enough.                        |
+|       8.51 |    10.79 | en       | speaker_not_activated | There is always hope for the   |
+|            |          |          |                       | future.                        |
+|      11.71 |    14.11 | en       | speaker_not_activated | The future can be read from    |
+|            |          |          |                       | the past.                      |
+|      14.57 |    19.91 | en       | speaker_not_activated | The past foreshadows the       |
+|            |          |          |                       | present and the present hasn't |
+|            |          |          |                       | been written yet.              |
++------------+----------+----------+-----------------------+--------------------------------+
+```
+
+More information about CLI options and usage on [https://github.com/gladiaio/gladia-cli](https://github.com/gladiaio/gladia-cli)
+
+## Code Samples
+
+Additional code samples can be found in the [Gladia Samples repository on Github](https://github.com/gladiaio/gladia-samples)

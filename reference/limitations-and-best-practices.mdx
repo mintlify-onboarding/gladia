@@ -1,0 +1,45 @@
+---
+title: "Limitations and Best Practices"
+description: This page outlines the known limitations of the Audio Transcription API and offers best practices for ensuring a seamless transcription experience.
+---
+
+## Known Limitations
+
+1. **Audio Length:** The maximum length of audio that can be transcribed in a single request is currently  
+135 minutes. Attempts to transcribe longer audio files may result in errors.
+2. **File Size:** Audio files must not exceed 500 MB in size. Larger files will not be accepted by the API.
+3. **API Call Limits:** To ensure the quality of service and fairness to all users, API call limits have been implemented. For the free tier, users can make a maximum of 20 calls per hour, with up to 3 concurrent requests. Users subscribed to the Pro tier can make up to 200 calls per minute and up to 15 concurrent requests.
+
+## Best Practices
+
+### Working with long audio files
+
+When transcribing long audio files (and not using webhook\_url), API calls can last more than a minute.  
+Therefore, it's recommended to enable the [TCP Keepalive](https://tldp.org/HOWTO/html%5Fsingle/TCP-Keepalive-HOWTO/) to better support long-running connections.  
+To enable it, refer to your language and OS documentations. 
+
+For example:  
+using http/https module in Node.js: [https://nodejs.org/api/net.html#socketsetkeepaliveenable-initialdelay](https://nodejs.org/api/net.html#socketsetkeepaliveenable-initialdelay)  
+using socket module in Python: [https://stackoverflow.com/a/14855726](https://stackoverflow.com/a/14855726)
+
+[Recommended values](https://cloud.google.com/compute/docs/troubleshooting/general-tips#idle-connections) are:
+
+```
+SO_KEEPALIVE = 1
+TCP_KEEPIDLE = 60
+TCP_KEEPINTVL = 60
+TCP_KEEPCNT = 5
+```
+
+### Splitting oversize audio files
+
+For audio files that are near or exceed the limitations on length and size, it is recommended to split them into smaller chunks of \~60 minutes each. This approach not only adheres to the API constraints but also generally yields better transcription results.
+
+#### Tools for Splitting Audio Files
+
+1. **FFMPEG:** [FFMPEG](https://ffmpeg.org/) is a versatile command-line tool that can be used to manipulate audio and video files. It is a popular choice for splitting long audio files.
+2. **ffmpeg-python:** For Python users, [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) is a wrapper around FFMPEG that provides a more Pythonic interface for interacting with FFMPEG.
+3. **prism-media for Node.js:** Node.js users can use [prism-media](https://www.npmjs.com/package/prism-media) for manipulating media files, including splitting audio files.
+4. **fluent-ffmpeg for Node.js:** Another option for Node.js users is [fluent-ffmpeg](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg), which offers a simpler and more fluent API for handling media files.
+
+Following these best practices will help you avoid issues due to limitations and maximize the quality of the transcriptions you obtain from the Audio Transcription API.

@@ -1,0 +1,26 @@
+---
+title: "Webhooks"
+description: Webhooks allow for asynchronous data processing in APIs. Unlike traditional APIs that return the result instantly, a webhook sends the result (e.g., audio transcription) to a specified client-provided API, allowing for processing without waiting for task completion.
+---
+
+### Important Note:
+
+Ensure that the provided webhook is configured to respond to an **OPTIONS** request. The API uses this method to verify the validity and accessibility of the provided webhook URL.
+
+### How to Test the Webhook
+
+Testing a webhook is straightforward with tools like an online address generator, such as [https://webhook.site](https://webhook.site/).
+
+1. Visit the website, and use the ‘Copy to clipboard’ option to obtain a test webhook URL (e.g., [https://webhook.site/e1d794ca-e637-4a2a-81db-8a0fef1247bc](https://webhook.site/e1d794ca-e637-4a2a-81db-8a0fef1247bc)).  
+![](/images/reference/14179b3-image.png)
+2. Utilize this webhook URL in a request, for example:    
+
+```Bash Bash
+curl -X 'POST' \  
+    'https://api.gladia.io/audio/text/audio-transcription/' \  
+    -H 'x-gladia-key: <your api key>' \  
+    -F "audio_url=http://files.gladia.io/example/audio-transcription/split_infinity.wav" \  
+    -F "webhook_url=https://webhook.site/e1d794ca-e637-4a2a-81db-8a0fef1247bc"  
+```
+
+3. Execute the request, and visit your page on [https://webhook.site](https://webhook.site/) to verify its functionality.

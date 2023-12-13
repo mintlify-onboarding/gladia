@@ -1,0 +1,70 @@
+{
+    "name": "Gladia",
+    "logo": {
+      "light": "/logo/light.png",
+      "dark": "/logo/dark.png"
+    },
+    "favicon": "/favicon.png",
+    "colors": {
+      "primary": "#0E0E0E",
+      "light": "#FAFAFA",
+      "dark": "#0E0E0E"
+    },
+    "topbarCtaButton": {
+      "name": "Sign Up",
+      "url": "https://app.gladia.io/auth/signup/?utm_source=Gladia"
+    },
+    "modeToggle": {
+        "default": "dark"
+    },
+    "anchors": [
+      {
+        "name": "Contact Us",
+        "icon": "inbox",
+        "url": "https://www.gladia.io/contact"
+      },
+      {
+        "name": "Blog",
+        "icon": "newspaper",
+        "url": "https://www.gladia.io/blog"
+      },
+      {
+        "name": "Media Kit",
+        "icon": "palette",
+        "url": "https://drive.google.com/drive/folders/1_Lmv2iGeNrRakRYqKrYjwZGEuQi3gmYa"
+      }
+    ],
+    "navigation": [
+        {
+            "group": "Gladia",
+            "pages": [
+              "reference/introduction",
+              "reference/overview",
+              {
+                "group": "Response Formats",
+                "pages": [
+                  "reference/response-format",
+                  "reference/export-srt-or-vtt-caption-files"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "General Information",
+            "pages": [
+              "reference/error-codes",
+              "reference/webhooks",
+              "reference/limitations-and-best-practices",
+              "reference/supported-languages",
+              "reference/supported-media-formats"
+            ]
+          }
+    ],
+    "footerSocials":
+      {
+          "twitter": "https://twitter.com/gladia_io",
+          "linkedin": "https://www.linkedin.com/company/gladia-io/",
+          "github": "https://github.com/gladiaio/",
+          "discord": "https://discord.com/invite/UUd79ckzz9"
+      }
+  }
