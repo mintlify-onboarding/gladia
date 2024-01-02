@@ -16,15 +16,12 @@ Example of a speaker-based transcript.
 
 Gladia's API is simple, and as with most of the other API options, you can toggle the diarization using the _"toggle\_diarization"_ option to _"true"_.
 
-> ### 📘
-> 
-> Channel-based diarization doesn't require activating diarization
+<Note>Channel-based diarization doesn't require activating diarization</Note>
 
 ### Using CURL
 
-shell
-
-`curl --request POST \
+```shell shell
+curl --request POST \
      --url 'https://api.gladia.io/audio/text/audio-transcription/?model=large-v2' \
      --header 'accept: application/json' \
      --header 'x-gladia-key: XXXXXXXXXXX' \
@@ -33,7 +30,7 @@ shell
      --form toggle_diarization=true \
      --form diarization_max_speakers=2 \
      --form output_format=json
-`
+```
 
 ### Using any programming language
 
@@ -43,12 +40,11 @@ Please visit the interactive documentation to generate your favorite language sn
 
 ### Using the CLI
 
-shell
-
-`gladia --audio-url http://files.gladia.io/example/audio-transcription/split_infinity.wav \
+```shell shell
+gladia --audio-url http://files.gladia.io/example/audio-transcription/split_infinity.wav \
 			 --diarization #this will activate the diarization
        --diarization-max-speakers 2 #define the estimated maximum number of speakers in the audio
-`
+```
 
 ## Interpreting the results
 
@@ -56,9 +52,8 @@ shell
 
 Read the "channel" key in the output.
 
-output
-
-`{
+```json output
+{
   "prediction": [
     {
       "time_begin": 0.09,
@@ -86,21 +81,18 @@ output
     {...}
   ]
 }  
-`
+```
 
 channel\_0 will represent speaker 1 and channel\_1 represents speaker 2.
 
-> ### 📘
-> 
-> channel based diarization doesn't require activating diarization
+<Note>channel based diarization doesn't require activating diarization</Note>
 
 ### Algorithm-based diarization (multiple speakers per channel)
 
 Read the "speaker" key in the output.
 
-output
-
-`{
+```json output
+{
   "prediction": [
     {
       "time_begin": 2.13,
@@ -157,7 +149,7 @@ output
     },{...}
   ]
 }
-`
+```
 
 In this case, the speaker's case can be extracted directly from the "speaker" key.
 
@@ -187,9 +179,7 @@ As part of our proprietary AI-based diarization, we developed a method to avoid 
 
 The API will automatically pick the proper diarization method for your audio file and produce a high-quality speaker-based transcript — without sacrificing the unmatched transcription speed (under 60s per hour of audio).
 
-> ### 📘
-> 
-> Speaker diarization is a broad subject in speech recognition. You can check out this [blog post](https://medium.com/@gladia.io/gladia-speech-to-text-api-speaker-diarization-99bae50856a7) for more detailed information around the subject.
+<Note>Speaker diarization is a broad subject in speech recognition. You can check out this [blog post](https://medium.com/@gladia.io/gladia-speech-to-text-api-speaker-diarization-99bae50856a7) for more detailed information around the subject.</Note>
 
 ## How to know which diarization I need to use
 

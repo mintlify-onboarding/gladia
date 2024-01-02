@@ -12,9 +12,10 @@ The Gladia Audio Transcription WebSocket API allows developers to connect to a s
 
 The WebSocket endpoint for Gladia Audio Transcription API is:
 
-`wss://api.gladia.io/audio/text/audio-transcription
+```
+wss://api.gladia.io/audio/text/audio-transcription
 
-`
+```
 
 ### Establishing a WebSocket Connection
 
@@ -52,13 +53,14 @@ The accurate model will only return final frames at the end of each utterance, w
 
 Here's an example initial configuration message:
 
-`{
+```json
+{
     "x_gladia_key": "your_gladia_key",
     "sample_rate": 16000,
     "encoding": "mp3"
 }
 
-`
+```
 
 #### Sending Audio Data for Transcription
 
@@ -68,11 +70,12 @@ Once the WebSocket connection is established and the initial configuration messa
 
 Send JSON objects as messages to the WebSocket with the following structure:
 
-`{
+```json
+{
     "frames": "base64"
 }
 
-`
+```
 
 * `frames` (string): Contains the audio data in base64-encoded format.
 
@@ -102,7 +105,8 @@ Each result object with `"event": "transcript"`contains the following informatio
 
 With word timestamps enabled, the result can be the following:
 
-`{
+```json
+{
     "words": [
         {
             "word": "Dall'associazione",
@@ -119,7 +123,7 @@ With word timestamps enabled, the result can be the following:
     "duration": 0.58137
 }
 
-`
+```
 
 Please note that multiple result objects may be received during the transcription process, depending on the audio duration and WebSocket connection.t
 
@@ -127,9 +131,8 @@ Please note that multiple result objects may be received during the transcriptio
 
 The WebSocket connection may disconnect for any number of reasons. It's is important to implement a recovery mechanism on the client side to reopen the connection and continue the live transcription
 
-JavaScript
-
-`function connect() {
+```JavaScript JavaScript
+function connect() {
   socket = new WebSocket(gladiaUrl);
 
   socket.on("open", async () => {
@@ -146,13 +149,12 @@ async function reconnect() {
   await sleep(1000);
   connect();
 }
-`
+```
 
 The client should reinitiate the connection whenever **"close"** or **"error"** events are received.
 
-JavaScript
-
-`socket.on("close", () => {
+```JavaScript JavaScript
+socket.on("close", () => {
     console.log("Connection closed. Reconnecting...");
     reconnect();
   });
@@ -162,38 +164,41 @@ JavaScript
     reconnect();
   });
 
-`
+```
 
 ### Example Workflow
 
 1. Establish a WebSocket connection to `wss://api.gladia.io/audio/text/audio-transcription`.
 2. Send the initial configuration message as a JSON object to specify the transcription options.
 
-`{
+```json
+{
     "x_gladia_key": "your_gladia_key",
     "sample_rate": 16000,
     "encoding": "mp3"
 }
 
-`
+```
 
 1. Start sending audio data for transcription by converting the audio to base64-encoded bytes and including them in the `frames` field of a JSON object.
 
-`{
+```json
+{
     "frames": "base64"
 }
 
-`
+```
 
 1. Receive real-time transcription results in JSON format. Each result object will include the `type`, `transcription`, `language`, and `words` fields.
 
-`{
+```json
+{
     "type": "partial",
     "transcription": "Hello world.",
     "language": "en",
 }
 
-`
+```
 
 1. Continue sending audio data and receiving transcription results until the audio stream is complete.
 
@@ -248,9 +253,8 @@ For further assistance or inquiries, please refer to the Gladia documentation or
 
 ## Code samples
 
-Python
-
-`import asyncio
+```Python Python
+import asyncio
 import websockets
 import json
 import base64
@@ -326,15 +330,14 @@ async def main():
         await asyncio.gather(send_task, receive_task)
 
 asyncio.run(main())
-`
+```
 
 ### Working with Typescript
 
 #### Streaming a file
 
-TypeScript
-
-`` import WebSocket from "ws";
+```TypeScript TypeScript
+import WebSocket from "ws";
 import fs from "fs";
 import { resolve } from "path";
 import { exit } from "process";
@@ -419,13 +422,12 @@ socket.on("open", async () => {
   console.log("final closing");
   socket.close();
 });
- ``
+```
 
 #### Streaming a microphone
 
-TypeScript
-
-`` import { exit } from "process";
+```TypeScript TypeScript
+import { exit } from "process";
 import WebSocket from "ws";
 import mic from "mic";
 
@@ -498,4 +500,4 @@ socket.on("open", async () => {
 
   micophoneInstance.start();
 })
- ``
+```

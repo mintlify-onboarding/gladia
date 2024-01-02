@@ -1,8 +1,7 @@
 ---
 title: "Pre-recorded"
+description: "This API provides an interface for converting spoken language into written text, which is an essential capability for applications such as voice assistants, subtitling services, note-taking apps, and many more. Here, we will provide a comprehensive guide on the parameters that can be used with this API endpoint to customize and optimize the transcription process according to your needs."
 ---
-
-This API provides an interface for converting spoken language into written text, which is an essential capability for applications such as voice assistants, subtitling services, note-taking apps, and many more. Here, we will provide a comprehensive guide on the parameters that can be used with this API endpoint to customize and optimize the transcription process according to your needs.
 
 The Audio Transcription API Endpoint accepts audio files and transcribes them into text by leveraging sophisticated speech recognition algorithms. It is crucial to understand the parameters that can be used when making a request to this endpoint, as they dictate how the API processes the audio input.
 
@@ -12,9 +11,10 @@ The Audio Transcription API Endpoint accepts audio files and transcribes them in
 
 The post endpoint for Gladia Audio Transcription API is:
 
-`<https://api.gladia.io/audio/text/audio-transcription/>
+```
+<https://api.gladia.io/audio/text/audio-transcription/>
 
-`
+```
 
 #### Body Params
 
@@ -46,9 +46,10 @@ Default value is `automatic single language`.
 
 The post endpoint for Gladia Audio Transcription API is:
 
-`<https://api.gladia.io/video/text/video-transcription/>
+```
+<https://api.gladia.io/video/text/video-transcription/>
 
-`
+```
 
 #### Body Params
 
@@ -69,17 +70,20 @@ The post endpoint for Gladia Audio Transcription API is:
 
 ## Code samples
 
-ShellPythonJavaScriptTypeScriptPHP
 
-`curl -X POST \
+<CodeGroup>
+
+```Shell Shell
+curl -X POST \
   -H 'x-gladia-key: YOUR_GLADIA_TOKEN' \
   -H 'accept: application/json' \
   -F '[[email protected]](/cdn-cgi/l/email-protection);type=audio/mp3' \
   -F 'toggle_diarization=True' \
   https://api.gladia.io/audio/text/audio-transcription/
-`
+```
 
-`import requests
+```Python Python
+import requests
 import os
 
 headers = {
@@ -116,9 +120,10 @@ with open(file_path, 'rb') as f:  # Open the file
     print('- Request failed');
     print(response.json())
   print('- End of work');
-`
+```
 
-`const axios = require("axios");
+```JavaScript JavaScript
+const axios = require("axios");
 const FormData = require("form-data");
 
 const gladiaKey = process.argv[2]
@@ -154,9 +159,10 @@ async function url() {
 }
 
 url()
-`
+```
 
-`import axios from "axios";
+```TypeScript TypeScript
+import axios from "axios";
 import fs from "fs";
 import FormData from "form-data";
 
@@ -214,9 +220,10 @@ fs.access(file_path, fs.constants.F_OK, (err) => {
       });
   }
 });
-`
+```
 
-`<?php
+```PHP PHP
+<?php
 
 $file_path = 'audio.mp3'; // Change with your file path
 
@@ -271,7 +278,8 @@ echo "- End of work\n";
 
 ?>
 
-`
+```
+</CodeGroup>
 
 ## Understanding billing
 
