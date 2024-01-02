@@ -8,21 +8,22 @@ After setting up the API connectors for Gladia let's build a very basic transcri
 
 1. Add a **File upload** component
 ![](/images/reference/dcdff1b-image.png) 
-1. Add an Action **Button** and a **Text** component
+2. Add an Action **Button** and a **Text** component
 ![](/images/reference/d23c616-image.png) 
-1. Right click on the text component and **group the element** in a **Row Container**
+3. Right click on the text component and **group the element** in a **Row Container**
 ![](/images/reference/8f9373a-image.png) 
-1. Set the created group to a **Type of content**: **Text**
+4. Set the created group to a **Type of content**: **Text**
 ![](/images/reference/f05c12b-image.png) 
-1. Go back to the text component and set the **value** to be **Parent goup's text**
+5. Go back to the text component and set the **value** to be **Parent goup's text**
 ![](/images/reference/f05ca29-image.png) 
-1. Select the **Transcribe** button added on step 2 and click **Edit Workflow** to set up an action on click.
+6. Select the **Transcribe** button added on step 2 and click **Edit Workflow** to set up an action on click.
 ![](/images/reference/13a3885-image.png) 
-1. In the **workflow** add a **plugin action** selecting **Gladia API File** action
+7. In the **workflow** add a **plugin action** selecting **Gladia API File** action
 ![](/images/reference/c3e374a-image.png) 
-1. Associate the File upload UI component to the API parameter to be sent to Gladia's API by adding a **Dynamic link** based on **dynamic data**
+8. Associate the File upload UI component to the API parameter to be sent to Gladia's API by adding a **Dynamic link** based on **dynamic data**
 ![](/images/reference/cc0ed2b-image.png) ![](/images/reference/01b0e68-image.png) ![](/images/reference/9b59ab7-image.png) 
-1. Display the result in the **Transcription UI text box**  by **creating a new action** and choosing **Display data in a group/popup**  
+9. Display the result in the **Transcription UI text box**  by **creating a new action** and choosing **Display data in a group/popup**  
+```
 \[block:image\]  
 {  
 "images": \[  
@@ -38,9 +39,10 @@ null
 \]  
 }  
 \[/block\]
-2. Set up the Group element to be updated
+```
+10. Set up the Group element to be updated
 ![](/images/reference/89b7520-image.png) 
-1. Set up the elements to be displayed in this group element based on the crafted Gladia's API response template following all the steps below
+11. Set up the elements to be displayed in this group element based on the crafted Gladia's API response template following all the steps below
 ![](/images/reference/3c3b28e-image.png) 
 
 ![](/images/reference/df1a7d5-image.png)

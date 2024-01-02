@@ -58,6 +58,34 @@
               "reference/supported-languages",
               "reference/supported-media-formats"
             ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              {
+                "group": "Working with Bubble.io",
+                "pages": [
+                  "reference/working-with-bubbleio",
+                  "reference/working-with-bubbleio-copy",
+                  "reference/example-of-gladias-bubbleio-application"
+                ]
+              },
+              "reference/using-gladia-for-virtual-meeting-recordings"
+            ]
+          },
+          {
+            "group": "Models",
+            "pages": [
+              {
+                "group": "Core Transcription",
+                "pages": [
+                  "reference/pre-recorded",
+                  "reference/live-audio"
+                ]
+              },
+              "reference/diarization-guide",
+              "reference/direct-translation"
+            ]
           }
     ],
     "footerSocials":

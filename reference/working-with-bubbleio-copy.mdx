@@ -26,15 +26,14 @@ Click on import another call from cURL.
 
 In the popup, paste the following cURL command.
 
-Shell
-
-`curl -X POST \
+```Shell Shell
+curl -X POST \
   -H 'x-gladia-key: YOUR_GLADIA_TOKEN' \
   -H 'accept: application/json' \
   -F '[[email protected]](/cdn-cgi/l/email-protection);type=audio/mp3' \
   -F 'toggle_diarization=True' \
   https://api.gladia.io/audio/text/audio-transcription/
-`
+```
 
 ![](/images/reference/1e63148-image.png) 
 
